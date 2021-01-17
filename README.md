@@ -12,7 +12,7 @@ O maior benefício desse tipo de empacotamento é poder restringir as classes so
 Por exemplo, só faz sentido acessar o `AccountRepository` de dentro do pacote 
 `br.com.joaomassan.transapp.account`
 
-Boas referências para esse tipo de empacotamento é a API Colletions e Persistence do Java.
+Boas referências para esse tipo de empacotamento são a API __Colletions__ e __Persistence__ do Java.
 
 ## Sobre o code-styling 
 
