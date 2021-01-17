@@ -9,8 +9,7 @@ Foi utilizado Java 8 porque ainda (em 13/01/2021) é a versão mais utilizada do
 O packaging by feature é encorajado pela documentação do Spring.
 
 Referência: 
-http://www.javapractices.com/topic/TopicAction.do?Id=205#:~:text=Package%2Dby%2Dfeature%20uses
-%20packages,with%20minimal%20coupling%20between%20packages.
+http://www.javapractices.com/topic/TopicAction.do?Id=205#:~:text=Package%2Dby%2Dfeature%20uses%20packages,with%20minimal%20coupling%20between%20packages.
 
 O maior benefício desse tipo de empacotamento é poder restringir as classes somente ao seu pacote.
 Por exemplo, só faz sentido acessar o `AccountRepository` de dentro do pacote 
