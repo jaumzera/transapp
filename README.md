@@ -18,8 +18,9 @@ Boas referências para esse tipo de empacotamento é a API Colletions e Persiste
 
 ### Formatação
 
-Usado o google-java-format como padrão de formatação do código.
-TODO: referências
+Usado o [google-java-format] (https://google.github.io/styleguide/javaguide.html) como padrão de 
+formatação do código.
+
 
 ### Anotações
 
@@ -37,8 +38,8 @@ public class AnnotatedClass {
 ```
 
 Usa-se o valor default para tudo. Anotações só são empregadas quando são realmente
-necessárias como, por exemplo, para adequar o estilo cammelCase dos atributos do
-código com o estilo snake_case do banco de dados.
+necessárias como, por exemplo, para adequar o estilo _cammelCase_ dos atributos do
+código com o estilo _snake_case_ do banco de dados.
 
 Exemplo:
 
