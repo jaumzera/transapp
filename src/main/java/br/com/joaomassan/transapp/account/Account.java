@@ -1,5 +1,6 @@
 package br.com.joaomassan.transapp.account;
 
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,21 @@ public class Account {
 
   private String name;
 
+  @Column(name = "available_credit_limit")
+  private BigDecimal availableCreditLimit;
+
   public Account(Long id) {
     this.id = id;
+  }
+
+  public void decreaseCreditLimit(BigDecimal value) {
+    if (value.compareTo(availableCreditLimit) > 0) {
+      throw AccountException.of("Unavailable credit limit: " + value, null);
+    }
+    this.availableCreditLimit = this.availableCreditLimit.subtract(value);
+  }
+
+  public void increaseValue(BigDecimal value) {
+    this.availableCreditLimit = this.availableCreditLimit.add(value);
   }
 }

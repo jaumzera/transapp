@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
@@ -24,6 +25,7 @@ class TransactionControllerIT {
   @Autowired private ObjectMapper objectMapper;
 
   @Test
+  @DirtiesContext
   void postTransaction_shouldCreateANewTransaction() throws Exception {
     val transactionCreationRequest =
         new TransactionCreationRequest(1L, 1L, new BigDecimal("201.77"));
@@ -32,7 +34,6 @@ class TransactionControllerIT {
             post("/transactions")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(transactionCreationRequest)))
-        .andDo(print())
         .andExpect(status().isCreated())
         .andExpect(jsonPath("$.id").isNotEmpty())
         .andExpect(jsonPath("$.account.userId").value(1L))
@@ -42,6 +43,20 @@ class TransactionControllerIT {
   }
 
   @Test
+  @DirtiesContext
+  void postTransaction_shouldNotCreateANewTransactionWithoutAccountCreditLimit() throws Exception {
+    val transactionCreationRequest =
+        new TransactionCreationRequest(1L, 1L, new BigDecimal("1201.77"));
+    this.mockMvc
+        .perform(
+            post("/transactions")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(transactionCreationRequest)))
+        .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  @DirtiesContext
   void postTransaction_shouldNotCreateANewTransactionWithInvalidOperationType() throws Exception {
     val transactionCreationRequest =
         new TransactionCreationRequest(1L, 129L, new BigDecimal("201.77"));

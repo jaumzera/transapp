@@ -1,8 +1,12 @@
 package br.com.joaomassan.transapp.account;
 
-class AccountException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-  static AccountException of(String message, Throwable throwable) {
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+public class AccountException extends RuntimeException {
+
+  public static AccountException of(String message, Throwable throwable) {
     return new AccountException(message, throwable);
   }
 

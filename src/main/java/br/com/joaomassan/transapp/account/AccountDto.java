@@ -1,5 +1,6 @@
 package br.com.joaomassan.transapp.account;
 
+import java.math.BigDecimal;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
@@ -9,7 +10,11 @@ import lombok.Value;
 public class AccountDto {
 
   public static AccountDto of(Account account) {
-    return new AccountDto(account.getId(), account.getDocumentNumber(), account.getName());
+    return new AccountDto(
+        account.getId(),
+        account.getDocumentNumber(),
+        account.getName(),
+        account.getAvailableCreditLimit());
   }
 
   Long userId;
@@ -17,4 +22,6 @@ public class AccountDto {
   String documentNumber;
 
   String name;
+
+  BigDecimal availableCreditLimit;
 }

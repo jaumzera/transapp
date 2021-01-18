@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.math.BigDecimal;
 import java.util.Objects;
 import lombok.val;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,8 @@ class AccountControllerIT {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.userId").value(1L))
         .andExpect(jsonPath("$.documentNumber").value("22233333311"))
-        .andExpect(jsonPath("$.name").value("Déx Mi"));
+        .andExpect(jsonPath("$.name").value("Déx Mi"))
+        .andExpect(jsonPath("$.availableCreditLimit").value("1000.0"));
   }
 
   @Test
@@ -42,7 +44,8 @@ class AccountControllerIT {
 
   @Test
   void postAccount_shouldCreateAnAccount() throws Exception {
-    val accountCreationRequest = new AccountCreationRequest("00011144499", "Mike Tyson");
+    val accountCreationRequest =
+        new AccountCreationRequest("00011144499", "Mike Tyson", new BigDecimal("1000.00"));
     this.mockMvc
         .perform(
             post("/accounts")
@@ -56,7 +59,9 @@ class AccountControllerIT {
 
   @Test
   void postAccount_shouldNotCreateIfAccountAlreadyExists() throws Exception {
-    val accountCreationRequest = new AccountCreationRequest("12345678910", "Ronnie James Padovana");
+    val accountCreationRequest =
+        new AccountCreationRequest(
+            "12345678910", "Ronnie James Padovana", new BigDecimal("1000.00"));
     this.mockMvc
         .perform(
             post("/accounts")

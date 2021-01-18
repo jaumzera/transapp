@@ -3,6 +3,7 @@ package br.com.joaomassan.transapp.account;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigDecimal;
 import javax.persistence.PersistenceException;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 class AccountServiceTest {
 
-  private final Account account = new Account(null, "00011122233", "Muddy Waters");
+  private final Account account =
+      new Account(null, "00011122233", "Muddy Waters", new BigDecimal("1000.00"));
 
   private AccountRepository accountRepository;
 
